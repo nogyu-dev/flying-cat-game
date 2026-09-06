@@ -64,11 +64,11 @@ function ticker() {
 
 function createCat() {
     game.cat = {
-        x: game.image.cat.width / 2,
-        y: canvas.height - game.image.cat.height / 2,
+        x: 100,
+        y: canvas.height / 2,
         moveY: 0,
-        width: game.image.cat.width,
-        height: game.image.cat.height,
+        width: 150,
+        height: 100,
         image: game.image.cat
     }
 }
@@ -115,7 +115,8 @@ function moveEnemys() {
 }
 
 function drawCat() {
-    ctx.drawImage(game.image.cat, game.cat.x - game.cat.width / 2, game.cat.y - game.cat.height / 2);
+    ctx.drawImage(game.image.cat, game.cat.x - game.cat.width / 2, game.cat.y - game.cat.height / 2,
+      game.cat.width,game.cat.height);
 }
 
 function drawEnemys() {
