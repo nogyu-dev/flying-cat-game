@@ -98,13 +98,18 @@ function createBird() {
 
 function moveCat() {
     game.cat.y += game.cat.moveY;
-    if (game.cat.y >= canvas.height - game.cat.height / 2) {
+        game.cat.moveY += 0.5;
+            // 画面の上から出ないようにする
+    if (game.cat.y < game.cat.height / 2) {
+        game.cat.y = game.cat.height / 2;
+       game.cat.moveY = 0;
+    }
+    // 画面の下から出ないようにする
+    if (game.cat.y > canvas.height - game.cat.height / 2) {
         game.cat.y = canvas.height - game.cat.height / 2;
         game.cat.moveY = 0;
-    } else {
-        game.cat.moveY += 3;
     }
-}
+    }
 
 function moveEnemys() {
     for (const enemy of game.enemys) {
@@ -145,8 +150,8 @@ function hitCheck() {
 }
 
 document.onkeydown = function(e) {
-    if(e.key === ' ' && game.cat.moveY === 0) {
-        game.cat.moveY = -41;
+    if(e.key === ' ') {
+        game.cat.moveY = -7;;
     }
     if(e.key === 'Enter' && game.isGameOver === true) {
         init();
