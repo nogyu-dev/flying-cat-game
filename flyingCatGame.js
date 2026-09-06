@@ -8,6 +8,7 @@ const game = {
     clouds: [],
     cloudCounter: 0,
     image: {},
+    catSound: new Audio('sound/cat.mp3'),
     isGameOver: true,
     score: 0,
     timer: null
@@ -207,6 +208,8 @@ function hitCheck() {
 document.onkeydown = function(e) {
     if(e.key === ' ') {
         game.cat.moveY = -7;
+        game.catSound.currentTime = 0;
+        game.catSound.play();
     }
     if(e.key === 'Enter' && game.isGameOver === true) {
         init();
