@@ -1,10 +1,12 @@
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
-const imageNames = ['bird', 'cactus', 'cat'];
+const imageNames = ['bird', 'cactus', 'cat', 'sky', 'cloud'];
 
 // グローバルな game オブジェクト
 const game = {
     enemys: [],
+    clouds: [],
+    cloudCounter: 0,
     image: {},
     isGameOver: true,
     score: 0,
@@ -28,15 +30,30 @@ for (const imageName of imageNames) {
 
 function init() {
     game.enemys     = [];
+    game.clouds = [];
+    game.cloudCounter = 0;
     game.isGameOver = false;
     game.score      = 0;
+
     createCat();
+    createCloud();
+
     game.timer = setInterval(ticker, 30);
 }
 
 function ticker() {
     // 画面クリア
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // 背景の描画
+    drawSky();
+
+    game.cloudCounter += 1;
+
+    if (game.cloudCounter >= 300) {
+        createCloud();
+        game.cloudCounter = 0;
+    }
 
     // 敵キャラクターの生成
     if(Math.floor(Math.random() * (100 - game.score / 100)) === 0) {
@@ -47,10 +64,12 @@ function ticker() {
     }
 
     // キャクターの移動
+    moveClouds(); // 雲の移動
     moveCat(); // 猫の移動
     moveEnemys(); // 敵キャラクターの移動
 
     //描画
+    drawClouds();// 雲の描画
     drawCat();// 猫の描画
     drawEnemys(); // 敵キャラクターの描画
     drawScore(); // スコアの描画
@@ -71,6 +90,18 @@ function createCat() {
         height: 100,
         image: game.image.cat
     }
+}
+
+function createCloud() {
+    game.clouds.push({
+        x: canvas.width + 100,
+        y: Math.random() * canvas.height,
+        width: 500,
+        height: 250,
+        moveX: -3,
+        image: game.image.cloud
+    });
+
 }
 
 function createCactus() {
@@ -111,6 +142,14 @@ function moveCat() {
     }
     }
 
+function moveClouds() {
+    for (const cloud of game.clouds) {
+        cloud.x += cloud.moveX;
+    }
+    // 画面の外に出た雲を配列から削除
+game.clouds = game.clouds.filter(cloud => cloud.x > -cloud.width);
+}
+
 function moveEnemys() {
     for (const enemy of game.enemys) {
         enemy.x += enemy.moveX;
@@ -124,10 +163,26 @@ function drawCat() {
       game.cat.width,game.cat.height);
 }
 
+function drawClouds() {
+    for (const cloud of game.clouds) {
+        ctx.drawImage(
+            cloud.image,
+            cloud.x - cloud.width / 2,
+            cloud.y - cloud.height / 2,
+            cloud.width,
+            cloud.height
+        );
+    }
+}
+
 function drawEnemys() {
     for (const enemy of game.enemys) {
         ctx.drawImage(enemy.image, enemy.x - enemy.width / 2, enemy.y - enemy.height / 2);
     }
+}
+
+function drawSky() {
+    ctx.drawImage(game.image.sky, 0, 0, canvas.width, canvas.height);
 }
 
 function drawScore() {
@@ -151,7 +206,7 @@ function hitCheck() {
 
 document.onkeydown = function(e) {
     if(e.key === ' ') {
-        game.cat.moveY = -7;;
+        game.cat.moveY = -7;
     }
     if(e.key === 'Enter' && game.isGameOver === true) {
         init();
