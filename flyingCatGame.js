@@ -1,6 +1,6 @@
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
-const imageNames = ['chicken', 'centaur', 'squirrel', 'cat', 'sky', 'cloud'];
+const imageNames = ['chicken', 'centaur', 'squirrel', 'bomb', 'cat', 'sky', 'cloud'];
 
 // グローバルな game オブジェクト
 const game = {
@@ -62,7 +62,7 @@ function ticker() {
     }
 
     // 敵キャラクターの生成
-    if(Math.floor(Math.random() * 300 ) === 0) {
+    if(Math.floor(Math.random() * 400 ) === 0) {
         createChicken();
     }
     if(Math.floor(Math.random() * 1000) === 0) {
@@ -71,6 +71,9 @@ function ticker() {
     if(Math.floor(Math.random() * 900) === 0) {
        createSquirrel();
      }
+     if(Math.floor(Math.random() * 600) === 0) {
+       createBomb();
+    }
 
     // キャクターの移動
     moveClouds(); // 雲の移動
@@ -116,7 +119,7 @@ function createCloud() {
 function createChicken() {
     const chickenY = Math.random() * (canvas.height - 100) + 50;
     game.enemys.push({
-        x: canvas.width + game.image.chicken.width / 2,
+        x: canvas.width + 50,
         y: chickenY,
         width: 100,
         height: 90,
@@ -146,6 +149,18 @@ function createSquirrel() {
         height: 40,
         moveX: -30,
         image: game.image.squirrel
+    });
+}
+
+function createBomb() {
+    const bombY = Math.random() * (canvas.height - 70) + 35;
+    game.enemys.push({
+        x: canvas.width + 55,
+        y: bombY,
+        width: 110,
+        height: 70,
+        moveX: -4,
+        image: game.image.bomb
     });
 }
 
@@ -216,8 +231,8 @@ function drawScore() {
 function hitCheck() {
     for (const enemy of game.enemys) {
         if (
-            Math.abs(game.cat.x - enemy.x) < game.cat.width * 0.8 / 2 + enemy.width * 0.8 / 2 &&
-            Math.abs(game.cat.y - enemy.y) < game.cat.height * 0.8 / 2 + enemy.height * 0.8 / 2
+            Math.abs(game.cat.x - enemy.x) < game.cat.width * 0.7 / 2 + enemy.width * 0.7 / 2 &&
+            Math.abs(game.cat.y - enemy.y) < game.cat.height * 0.7 / 2 + enemy.height * 0.7 / 2
         ) {
             game.isGameOver = true;
             ctx.font = 'bold 100px serif';
