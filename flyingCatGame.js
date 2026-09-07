@@ -1,6 +1,6 @@
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
-const imageNames = ['chicken', 'centaur', 'squirrel', 'bomb', 'negigirl', 'rushingboy', 'cat', 'sky', 'cloud'];
+const imageNames = ['chicken', 'centaur', 'squirrel', 'bomb', 'negigirl', 'rushingboy', 'bath', 'cat', 'sky', 'cloud'];
 
 // グローバルな game オブジェクト
 const game = {
@@ -80,6 +80,11 @@ function ticker() {
     if(Math.floor(Math.random() * 600) === 0) {
         createRushingBoy();
     }
+    if(Math.floor(Math.random() * 800) === 0) {
+        createBath();
+    }
+
+
 
     // キャクターの移動
     moveClouds(); // 雲の移動
@@ -129,7 +134,7 @@ function createChicken() {
         y: chickenY,
         width: 100,
         height: 90,
-        moveX: -5,
+        moveX: -4,
         image: game.image.chicken
     });
 }
@@ -165,7 +170,7 @@ function createBomb() {
         y: bombY,
         width: 100,
         height: 70,
-        moveX: -4,
+        moveX: -7,
         image: game.image.bomb
     });
 }
@@ -191,6 +196,18 @@ function createRushingBoy() {
         height: 125,
         moveX: -15,
         image: game.image.rushingboy
+    });
+}
+
+function createBath() {
+    const bathY = Math.random() * (canvas.height - 180) + 90;
+    game.enemys.push({
+        x: canvas.width + 130,
+        y: bathY,
+        width: 260,
+        height: 180,
+        moveX: -5,
+        image: game.image.bath
     });
 }
 
