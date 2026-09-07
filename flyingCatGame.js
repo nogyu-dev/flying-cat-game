@@ -1,6 +1,6 @@
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
-const imageNames = ['chicken', 'centaur', 'squirrel', 'bomb', 'cat', 'sky', 'cloud'];
+const imageNames = ['chicken', 'centaur', 'squirrel', 'bomb', 'negigirl', 'cat', 'sky', 'cloud'];
 
 // グローバルな game オブジェクト
 const game = {
@@ -62,7 +62,7 @@ function ticker() {
     }
 
     // 敵キャラクターの生成
-    if(Math.floor(Math.random() * 400 ) === 0) {
+    if(Math.floor(Math.random() * 300 ) === 0) {
         createChicken();
     }
     if(Math.floor(Math.random() * 1000) === 0) {
@@ -70,9 +70,12 @@ function ticker() {
     }
     if(Math.floor(Math.random() * 900) === 0) {
        createSquirrel();
-     }
-     if(Math.floor(Math.random() * 600) === 0) {
+    }
+     if(Math.floor(Math.random() * 500) === 0) {
        createBomb();
+    }
+     if(Math.floor(Math.random() * 700) === 0) {
+        createNegiGirl();
     }
 
     // キャクターの移動
@@ -98,8 +101,8 @@ function createCat() {
         x: 100,
         y: canvas.height / 2,
         moveY: 0,
-        width: 150,
-        height: 100,
+        width: 130,
+        height: 90,
         image: game.image.cat
     }
 }
@@ -155,12 +158,24 @@ function createSquirrel() {
 function createBomb() {
     const bombY = Math.random() * (canvas.height - 70) + 35;
     game.enemys.push({
-        x: canvas.width + 55,
+        x: canvas.width + 50,
         y: bombY,
-        width: 110,
+        width: 100,
         height: 70,
         moveX: -4,
         image: game.image.bomb
+    });
+}
+
+function createNegiGirl() {
+    const girlY = Math.random() * (canvas.height - 125) + 62.5;
+    game.enemys.push({
+        x: canvas.width + 80,
+        y: girlY,
+        width: 160,
+        height: 125,
+        moveX: -7,
+        image: game.image.negigirl
     });
 }
 
