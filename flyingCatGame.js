@@ -1,6 +1,6 @@
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
-const imageNames = ['chicken', 'cactus', 'cat', 'sky', 'cloud'];
+const imageNames = ['chicken', 'centaur', 'cat', 'sky', 'cloud'];
 
 // グローバルな game オブジェクト
 const game = {
@@ -62,11 +62,12 @@ function ticker() {
     }
 
     // 敵キャラクターの生成
-    if(Math.floor(Math.random() * (100 - game.score / 100)) === 0) {
-        createCactus();
-    }
-    if(Math.floor(Math.random() * (200 - game.score / 100)) === 0) {
+    if(Math.floor(Math.random() * 300 ) === 0) {
         createChicken();
+    }
+
+    if(Math.floor(Math.random() * 900) === 0) {
+        createCentaur();
     }
 
     // キャクターの移動
@@ -110,31 +111,36 @@ function createCloud() {
 
 }
 
-function createCactus() {
-    game.enemys.push({
-        x: canvas.width + game.image.cactus.width / 2,
-        y: canvas.height - game.image.cactus.height / 2,
-        width: game.image.cactus.width,
-        height: game.image.cactus.height,
-        moveX: -10,
-        image: game.image.cactus
-    });
-}
 
 function createChicken() {
     const chickenY = Math.random() * (canvas.height - 100) + 50;
     game.enemys.push({
         x: canvas.width + game.image.chicken.width / 2,
         y: chickenY,
-        width: 150,
-        height: 100,
+        width: 100,
+        height: 90,
         moveX: -5,
         image: game.image.chicken
     });
 }
 
+function createCentaur() {
+    const centaurY = Math.random() * (canvas.height - 280) + 140 ;
+    game.enemys.push({
+       x: canvas.width + 150,
+        y: centaurY,
+        width: 300,
+        height: 280,
+        moveX: -3,
+        image: game.image.centaur
+    });
+}
+
+
+
+
 function moveCat() {
-    game.cat.y += game.cat.moveY;
+    game.cat.y += game.cat.moveY; 
         game.cat.moveY += 0.5;
             // 画面の上から出ないようにする
     if (game.cat.y < game.cat.height / 2) {
