@@ -103,7 +103,7 @@ function ticker() {
     hitCheck();
 
     // カウンターの更新
-    game.score += 1;
+    game.score += 0.3;
 }
 
 function createCat() {
@@ -286,7 +286,7 @@ function drawSky() {
 
 function drawScore() {
     ctx.font = '24px serif';
-    ctx.fillText(`score: ${game.score}`, 0, 30);
+    ctx.fillText(`飛行距離 : ${Math.floor(game.score)} m`, 10, 30);
 }
 
 function hitCheck() {
