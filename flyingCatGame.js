@@ -199,8 +199,8 @@ function drawScore() {
 function hitCheck() {
     for (const enemy of game.enemys) {
         if (
-            Math.abs(game.cat.x - enemy.x) < game.cat.width / 2 + enemy.width / 2 &&
-            Math.abs(game.cat.y - enemy.y) < game.cat.height / 2 + enemy.height  / 2
+            Math.abs(game.cat.x - enemy.x) < game.cat.width * 0.8 / 2 + enemy.width * 0.8 / 2 &&
+            Math.abs(game.cat.y - enemy.y) < game.cat.height * 0.8 / 2 + enemy.height * 0.8 / 2
         ) {
             game.isGameOver = true;
             ctx.font = 'bold 100px serif';
