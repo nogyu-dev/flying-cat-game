@@ -1,6 +1,6 @@
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
-const imageNames = ['chicken', 'centaur', 'cat', 'sky', 'cloud'];
+const imageNames = ['chicken', 'centaur', 'squirrel', 'cat', 'sky', 'cloud'];
 
 // グローバルな game オブジェクト
 const game = {
@@ -65,10 +65,12 @@ function ticker() {
     if(Math.floor(Math.random() * 300 ) === 0) {
         createChicken();
     }
-
-    if(Math.floor(Math.random() * 900) === 0) {
+    if(Math.floor(Math.random() * 1000) === 0) {
         createCentaur();
     }
+    if(Math.floor(Math.random() * 900) === 0) {
+       createSquirrel();
+     }
 
     // キャクターの移動
     moveClouds(); // 雲の移動
@@ -111,7 +113,6 @@ function createCloud() {
 
 }
 
-
 function createChicken() {
     const chickenY = Math.random() * (canvas.height - 100) + 50;
     game.enemys.push({
@@ -136,7 +137,17 @@ function createCentaur() {
     });
 }
 
-
+function createSquirrel() {
+    const squirrelY = Math.random() * (canvas.height - 40) + 20;
+    game.enemys.push({
+        x: canvas.width + 30,
+        y: squirrelY,
+        width: 60,
+        height: 40,
+        moveX: -30,
+        image: game.image.squirrel
+    });
+}
 
 
 function moveCat() {
