@@ -1,6 +1,6 @@
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
-const imageNames = ['chicken', 'centaur', 'squirrel', 'bomb', 'negigirl', 'rushingboy', 'bath', 'cat', 'sky', 'cloud'];
+const imageNames = ['chicken', 'centaur', 'squirrel', 'bomb', 'negigirl', 'rushingboy', 'bath', 'yoshimuraufo', 'cat', 'sky', 'cloud'];
 
 // グローバルな game オブジェクト
 const game = {
@@ -65,7 +65,7 @@ function ticker() {
     if(Math.floor(Math.random() * 300 ) === 0) {
         createChicken();
     }
-    if(Math.floor(Math.random() * 1000) === 0) {
+    if(Math.floor(Math.random() * 1500) === 0) {
         createCentaur();
     }
     if(Math.floor(Math.random() * 900) === 0) {
@@ -83,7 +83,9 @@ function ticker() {
     if(Math.floor(Math.random() * 800) === 0) {
         createBath();
     }
-
+    if(Math.floor(Math.random() * 1000) === 0) {
+    createYoshimuraUfo();
+    }
 
 
     // キャクターの移動
@@ -208,6 +210,18 @@ function createBath() {
         height: 180,
         moveX: -5,
         image: game.image.bath
+    });
+}
+
+function createYoshimuraUfo() {
+    const ufoY = Math.random() * (canvas.height - 190) + 95;
+    game.enemys.push({
+        x: canvas.width + 105,
+        y: ufoY,
+        width: 210,
+        height: 190,
+        moveX: -6,
+        image: game.image.yoshimuraufo
     });
 }
 
