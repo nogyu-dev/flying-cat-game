@@ -1,6 +1,6 @@
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
-const imageNames = ['bird', 'cactus', 'cat', 'sky', 'cloud'];
+const imageNames = ['chicken', 'cactus', 'cat', 'sky', 'cloud'];
 
 // グローバルな game オブジェクト
 const game = {
@@ -55,6 +55,7 @@ function ticker() {
 
     game.cloudCounter += 1;
 
+    // 雲の生成
     if (game.cloudCounter >= 300) {
         createCloud();
         game.cloudCounter = 0;
@@ -65,7 +66,7 @@ function ticker() {
         createCactus();
     }
     if(Math.floor(Math.random() * (200 - game.score / 100)) === 0) {
-        createBird();
+        createChicken();
     }
 
     // キャクターの移動
@@ -120,15 +121,15 @@ function createCactus() {
     });
 }
 
-function createBird() {
-    const birdY = Math.random() * (300 - game.image.bird.height) + 150;
+function createChicken() {
+    const chickenY = Math.random() * (canvas.height - 100) + 50;
     game.enemys.push({
-        x: canvas.width + game.image.bird.width / 2,
-        y: birdY,
-        width: game.image.bird.width,
-        height: game.image.bird.height,
-        moveX: -15,
-        image: game.image.bird
+        x: canvas.width + game.image.chicken.width / 2,
+        y: chickenY,
+        width: 150,
+        height: 100,
+        moveX: -5,
+        image: game.image.chicken
     });
 }
 
@@ -182,7 +183,7 @@ function drawClouds() {
 
 function drawEnemys() {
     for (const enemy of game.enemys) {
-        ctx.drawImage(enemy.image, enemy.x - enemy.width / 2, enemy.y - enemy.height / 2);
+        ctx.drawImage(enemy.image, enemy.x - enemy.width / 2, enemy.y - enemy.height / 2, enemy.width, enemy.height);
     }
 }
 
