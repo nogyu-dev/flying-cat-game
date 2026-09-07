@@ -1,6 +1,6 @@
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
-const imageNames = ['chicken', 'centaur', 'squirrel', 'bomb', 'negigirl', 'cat', 'sky', 'cloud'];
+const imageNames = ['chicken', 'centaur', 'squirrel', 'bomb', 'negigirl', 'rushingboy', 'cat', 'sky', 'cloud'];
 
 // グローバルな game オブジェクト
 const game = {
@@ -74,8 +74,11 @@ function ticker() {
      if(Math.floor(Math.random() * 500) === 0) {
        createBomb();
     }
-     if(Math.floor(Math.random() * 700) === 0) {
+     if(Math.floor(Math.random() * 600) === 0) {
         createNegiGirl();
+    }
+    if(Math.floor(Math.random() * 600) === 0) {
+        createRushingBoy();
     }
 
     // キャクターの移動
@@ -176,6 +179,18 @@ function createNegiGirl() {
         height: 125,
         moveX: -7,
         image: game.image.negigirl
+    });
+}
+
+function createRushingBoy() {
+    const rushingBoyY = Math.random() * (canvas.height - 125) + 62.5;
+    game.enemys.push({
+        x: canvas.width + 75,
+        y: rushingBoyY,
+        width: 150,
+        height: 125,
+        moveX: -15,
+        image: game.image.rushingboy
     });
 }
 
