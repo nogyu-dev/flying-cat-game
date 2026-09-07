@@ -9,10 +9,14 @@ const game = {
     cloudCounter: 0,
     image: {},
     catSound: new Audio('sound/cat.mp3'),
+    bgm: new Audio('sound/bgm.mp3'),
     isGameOver: true,
     score: 0,
     timer: null
 };
+
+// BGMを繰り返し再生する
+game.bgm.loop = true;
 
 // 複数画像読み込み
 let imageLoadCounter = 0;
@@ -200,6 +204,11 @@ function hitCheck() {
             game.isGameOver = true;
             ctx.font = 'bold 100px serif';
             ctx.fillText(`Game Over!`, 150, 200);
+
+            // BGMを停止
+            game.bgm.pause();
+            game.bgm.currentTime = 0;
+
             clearInterval(game.timer);
         }
     }
@@ -208,9 +217,15 @@ function hitCheck() {
 document.onkeydown = function(e) {
     if(e.key === ' ') {
         game.cat.moveY = -7;
+
+        // 猫の鳴き声
         game.catSound.currentTime = 0;
         game.catSound.play();
+
+        // BGMを再生
+        game.bgm.play();
     }
+
     if(e.key === 'Enter' && game.isGameOver === true) {
         init();
     }
