@@ -62,28 +62,28 @@ function ticker() {
     }
 
     // 敵キャラクターの生成
-    if(Math.floor(Math.random() * 300 ) === 0) {
+    if(Math.floor(Math.random() * 1300 ) === 0) {
         createChicken();
     }
-    if(Math.floor(Math.random() * 1500) === 0) {
+    if(Math.floor(Math.random() * 11500) === 0) {
         createCentaur();
     }
-    if(Math.floor(Math.random() * 900) === 0) {
+    if(Math.floor(Math.random() * 1900) === 0) {
        createSquirrel();
     }
-     if(Math.floor(Math.random() * 500) === 0) {
+     if(Math.floor(Math.random() * 1500) === 0) {
        createBomb();
     }
-     if(Math.floor(Math.random() * 600) === 0) {
+     if(Math.floor(Math.random() * 1600) === 0) {
         createNegiGirl();
     }
-    if(Math.floor(Math.random() * 600) === 0) {
+    if(Math.floor(Math.random() * 1600) === 0) {
         createRushingBoy();
     }
-    if(Math.floor(Math.random() * 800) === 0) {
+    if(Math.floor(Math.random() * 1800) === 0) {
         createBath();
     }
-    if(Math.floor(Math.random() * 1000) === 0) {
+    if(Math.floor(Math.random() * 11000) === 0) {
     createYoshimuraUfo();
     }
 
@@ -93,18 +93,36 @@ function ticker() {
     moveCat(); // 猫の移動
     moveEnemys(); // 敵キャラクターの移動
 
-    //描画
+    // あたり判定
+    hitCheck();
+
+    // 飛行距離の更新
+    game.score += 0.3;
+
+    // 1000mまで飛んだらゲームクリア
+    if (game.score >= 1000) {
+    game.score = 1000;
+    }
+
+   //描画
     drawClouds();// 雲の描画
     drawCat();// 猫の描画
     drawEnemys(); // 敵キャラクターの描画
     drawScore(); // スコアの描画
 
-    // あたり判定
-    hitCheck();
 
-    // カウンターの更新
-    game.score += 0.3;
+    // 1000mまで飛んだらゲームクリア
+    if (game.score >= 1000) {
+     game.isGameOver = true;
+
+    ctx.font = 'bold 80px serif';
+    ctx.fillText('Game Clear!', 350, 300);
+
+    game.bgm.pause();
+    clearInterval(game.timer);
+    }
 }
+
 
 function createCat() {
     game.cat = {
