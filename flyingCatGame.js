@@ -1,5 +1,7 @@
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
+const clearVideo = document.getElementById('clearVideo');
+
 const imageNames = ['chicken', 'centaur', 'squirrel', 'bomb', 'negigirl', 'rushingboy', 'bath', 'yoshimuraufo', 'cat', 'sky', 'cloud'];
 
 // グローバルな game オブジェクト
@@ -112,13 +114,24 @@ function ticker() {
 
 
     // 1000mまで飛んだらゲームクリア
-    if (game.score >= 1000) {
+    if (game.score >= 100) {
      game.isGameOver = true;
 
-    ctx.font = 'bold 80px serif';
-    ctx.fillText('Game Clear!', 350, 300);
+    // Game Clearの背景
+    ctx.fillStyle = 'lightblue';
+    ctx.fillRect(330, 110, 570, 110);
 
+    // Game Clearの文字
+    ctx.fillStyle = 'black';
+    ctx.font = 'bold 80px serif';
+    ctx.fillText('Game Clear!', 350, 200);
+  
     game.bgm.pause();
+
+    // クリア動画を表示して再生
+    clearVideo.style.display = 'block';
+    clearVideo.play();
+
     clearInterval(game.timer);
     }
 }
@@ -337,16 +350,12 @@ document.onkeydown = function(e) {
         // BGMを再生
         game.bgm.play();
     }
-
-    if(e.key === 'Enter' && game.isGameOver === true) {
-        init();
-    }
 };
 
 // スマホのタッチ操作
 document.ontouchstart = function() {
     game.cat.moveY = -7;
-    
+
     // 猫の鳴き声
     game.catSound.currentTime = 0;
     game.catSound.play();

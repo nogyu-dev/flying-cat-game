@@ -6,3 +6,13 @@ canvas {
     width: 100%;
     height: auto;
 }
+
+#clearVideo {
+    display: none;
+    position: fixed;
+    width: 80%;
+    max-width: 900px;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
