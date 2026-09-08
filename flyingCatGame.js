@@ -62,28 +62,28 @@ function ticker() {
     }
 
     // 敵キャラクターの生成
-    if(Math.floor(Math.random() * 1300 ) === 0) {
+    if(Math.floor(Math.random() * 400 ) === 0) {
         createChicken();
     }
-    if(Math.floor(Math.random() * 11500) === 0) {
+    if(Math.floor(Math.random() * 1500) === 0) {
         createCentaur();
     }
-    if(Math.floor(Math.random() * 1900) === 0) {
+    if(Math.floor(Math.random() * 1000) === 0) {
        createSquirrel();
     }
-     if(Math.floor(Math.random() * 1500) === 0) {
+     if(Math.floor(Math.random() * 600) === 0) {
        createBomb();
     }
-     if(Math.floor(Math.random() * 1600) === 0) {
+     if(Math.floor(Math.random() * 800) === 0) {
         createNegiGirl();
     }
-    if(Math.floor(Math.random() * 1600) === 0) {
+    if(Math.floor(Math.random() * 800) === 0) {
         createRushingBoy();
     }
-    if(Math.floor(Math.random() * 1800) === 0) {
+    if(Math.floor(Math.random() * 1000) === 0) {
         createBath();
     }
-    if(Math.floor(Math.random() * 11000) === 0) {
+    if(Math.floor(Math.random() * 1200) === 0) {
     createYoshimuraUfo();
     }
 
@@ -126,11 +126,11 @@ function ticker() {
 
 function createCat() {
     game.cat = {
-        x: 100,
+        x: 90,
         y: canvas.height / 2,
         moveY: 0,
-        width: 130,
-        height: 90,
+        width: 110,
+        height: 75,
         image: game.image.cat
     }
 }
@@ -148,7 +148,7 @@ function createCloud() {
 }
 
 function createChicken() {
-    const chickenY = Math.random() * (canvas.height - 100) + 50;
+    const chickenY = Math.random() * 130 + 570;
     game.enemys.push({
         x: canvas.width + 50,
         y: chickenY,
@@ -172,12 +172,12 @@ function createCentaur() {
 }
 
 function createSquirrel() {
-    const squirrelY = Math.random() * (canvas.height - 40) + 20;
+    const squirrelY = Math.random() * (canvas.height - 33) + 16.5;
     game.enemys.push({
-        x: canvas.width + 30,
+        x: canvas.width + 25,
         y: squirrelY,
-        width: 60,
-        height: 40,
+        width: 50,
+        height: 33,
         moveX: -30,
         image: game.image.squirrel
     });
@@ -315,7 +315,7 @@ function hitCheck() {
         ) {
             game.isGameOver = true;
             ctx.font = 'bold 100px serif';
-            ctx.fillText(`Game Over!`, 150, 200);
+            ctx.fillText(`Game Over!`, 370, 390);
 
             // BGMを停止
             game.bgm.pause();
@@ -342,3 +342,15 @@ document.onkeydown = function(e) {
         init();
     }
 };
+
+// スマホのタッチ操作
+document.ontouchstart = function() {
+    game.cat.moveY = -7;
+    
+    // 猫の鳴き声
+    game.catSound.currentTime = 0;
+    game.catSound.play();
+
+    // BGMを再生
+    game.bgm.play();
+}
