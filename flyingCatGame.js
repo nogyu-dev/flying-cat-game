@@ -119,12 +119,12 @@ function ticker() {
 
     // Game Clearの背景
     ctx.fillStyle = 'lightblue';
-    ctx.fillRect(330, 110, 570, 110);
+    ctx.fillRect(330, 110, 570, 130);
 
     // Game Clearの文字
     ctx.fillStyle = 'black';
     ctx.font = 'bold 80px serif';
-    ctx.fillText('Game Clear!', 350, 200);
+    ctx.fillText('Game Clear!', 350, 180);
   
     game.bgm.pause();
 
@@ -340,7 +340,7 @@ function hitCheck() {
 }
 
 document.onkeydown = function(e) {
-    if(e.key === ' ') {
+    if(e.key === ' ' && game.isGameOver === false) {
         game.cat.moveY = -7;
 
         // 猫の鳴き声
@@ -354,6 +354,7 @@ document.onkeydown = function(e) {
 
 // スマホのタッチ操作
 document.ontouchstart = function() {
+   if(game.isGameOver === false) {
     game.cat.moveY = -7;
 
     // 猫の鳴き声
@@ -363,3 +364,4 @@ document.ontouchstart = function() {
     // BGMを再生
     game.bgm.play();
 }
+};
