@@ -2,13 +2,15 @@ const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 const clearVideo = document.getElementById('clearVideo');
 
-const imageNames = ['chicken', 'centaur', 'squirrel', 'bomb', 'negigirl', 'rushingboy', 'bath', 'yoshimuraufo', 'cat', 'sky', 'cloud'];
+const imageNames = ['chicken', 'centaur', 'squirrel', 'bomb', 'negigirl', 'rushingboy', 'bath', 'yoshimuraufo', 'cat', 'sky', 'cloud', 'tsunoballoon'];
 
 // グローバルな game オブジェクト
 const game = {
     enemys: [],
     clouds: [],
     cloudCounter: 0,
+    tsunoballoon: null,
+    tsunoballoonCount: 0,
     image: {},
     catSound: new Audio('sound/cat.mp3'),
     bgm: new Audio('sound/bgm.mp3'),
@@ -39,6 +41,8 @@ function init() {
     game.enemys     = [];
     game.clouds = [];
     game.cloudCounter = 0;
+    game.tsunoballoon = null;
+    game.tsunoballoonCount = 0;
     game.isGameOver = false;
     game.score      = 0;
 
@@ -94,6 +98,7 @@ function ticker() {
     moveClouds(); // 雲の移動
     moveCat(); // 猫の移動
     moveEnemys(); // 敵キャラクターの移動
+    moveTsunoballoon(); // 津野先生風船の移動
 
     // あたり判定
     hitCheck();
@@ -101,20 +106,33 @@ function ticker() {
     // 飛行距離の更新
     game.score += 0.3;
 
-    // 1000mまで飛んだらゲームクリア
+    // 300mで1回目の邪魔画像
+    if(game.score >= 300 && game.tsunoballoonCount === 0) {
+    createTsunoballoon();
+    game.tsunoballoonCount = 1;
+    }
+
+    // 700mで2回目の邪魔画像
+    if(game.score >= 700 && game.tsunoballoonCount === 1) {
+    createTsunoballoon();
+    game.tsunoballoonCount = 2;
+    }
+
+    // 1000mを超えたら数値を1000に固定
     if (game.score >= 1000) {
     game.score = 1000;
     }
 
-   //描画
+   //描画 順番が大切
     drawClouds();// 雲の描画
     drawCat();// 猫の描画
     drawEnemys(); // 敵キャラクターの描画
+    drawTsunoballoon(); // 津野先生風船の描画
     drawScore(); // スコアの描画
 
 
     // 1000mまで飛んだらゲームクリア
-    if (game.score >= 100) {
+    if (game.score >= 1000) {
      game.isGameOver = true;
 
     // Game Clearの背景
@@ -256,6 +274,16 @@ function createYoshimuraUfo() {
     });
 }
 
+function createTsunoballoon() {
+    game.tsunoballoon = {
+        x: canvas.width / 2,
+        y: canvas.height + 450,
+        width: 600,
+        height: 900,
+        moveY: -7,
+        image: game.image.tsunoballoon
+    };
+}
 
 function moveCat() {
     game.cat.y += game.cat.moveY; 
@@ -288,6 +316,12 @@ function moveEnemys() {
     game.enemys = game.enemys.filter(enemy => enemy.x > -enemy.width);
 }
 
+function moveTsunoballoon() {
+    if(game.tsunoballoon !== null) {
+        game.tsunoballoon.y += game.tsunoballoon.moveY;
+    }
+}
+
 function drawCat() {
     ctx.drawImage(game.image.cat, game.cat.x - game.cat.width / 2, game.cat.y - game.cat.height / 2,
       game.cat.width,game.cat.height);
@@ -308,6 +342,18 @@ function drawClouds() {
 function drawEnemys() {
     for (const enemy of game.enemys) {
         ctx.drawImage(enemy.image, enemy.x - enemy.width / 2, enemy.y - enemy.height / 2, enemy.width, enemy.height);
+    }
+}
+
+function drawTsunoballoon() {
+    if(game.tsunoballoon !== null) {
+        ctx.drawImage(
+            game.tsunoballoon.image,
+            game.tsunoballoon.x - game.tsunoballoon.width / 2,
+            game.tsunoballoon.y - game.tsunoballoon.height / 2,
+            game.tsunoballoon.width,
+            game.tsunoballoon.height
+        );
     }
 }
 
