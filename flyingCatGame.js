@@ -9,6 +9,7 @@ const game = {
     enemys: [],
     clouds: [],
     cloudCounter: 0,
+    chickenCounter: 0,
     tsunoballoon: null,
     tsunoballoonCount: 0,
     image: {},
@@ -67,10 +68,14 @@ function ticker() {
         game.cloudCounter = 0;
     }
 
-    // 敵キャラクターの生成
-    if(Math.floor(Math.random() * 300 ) === 0) {
-        createChicken();
+    // 定期的にニワトリを生成
+    game.chickenCounter += 1;
+    if(game.chickenCounter >= 150) {
+    createChicken();
+    game.chickenCounter = 0;
     }
+
+    // ランダムに障害物を生成
     if(Math.floor(Math.random() * 1500) === 0) {
         createCentaur();
     }
