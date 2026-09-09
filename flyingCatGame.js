@@ -2,7 +2,7 @@ const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 const clearVideo = document.getElementById('clearVideo');
 
-const imageNames = ['chicken', 'centaur', 'squirrel', 'bomb', 'negigirl', 'rushingboy', 'bath', 'yoshimuramen', 'cat', 'sky', 'cloud', 'tsunoballoon'];
+const imageNames = ['chicken', 'centaur', 'squirrel', 'bomb', 'negigirl', 'rushingboy', 'bath', 'yoshimuramen', 'cat', 'sky', 'cloud', 'tsunoballoon', 'toppage'];
 
 // グローバルな game オブジェクト
 const game = {
@@ -51,7 +51,7 @@ function init() {
     createCat();
     createCloud();
 
-    game.timer = setInterval(ticker, 30);
+    ctx.drawImage( game.image.toppage, 0, 0, canvas.width, canvas.height);
 }
 
 function ticker() {
@@ -404,28 +404,61 @@ function hitCheck() {
 }
 
 document.onkeydown = function(e) {
+
+    // 最初のSpaceキーでゲームスタート
+
+    if(e.key === ' ' && game.timer === null) {
+
+        game.timer = setInterval(ticker, 30);
+
+        game.bgm.play();
+
+        return;
+
+    }
+
+    // ゲーム中の操作
+
     if(e.key === ' ' && game.isGameOver === false) {
+
         game.cat.moveY = -7;
 
-        // 猫の鳴き声
         game.catSound.currentTime = 0;
+
         game.catSound.play();
 
-        // BGMを再生
         game.bgm.play();
+
     }
+
 };
 
-// スマホのタッチ操作
 document.ontouchstart = function() {
-   if(game.isGameOver === false) {
-    game.cat.moveY = -7;
 
-    // 猫の鳴き声
-    game.catSound.currentTime = 0;
-    game.catSound.play();
+    // 最初のタップでゲームスタート
 
-    // BGMを再生
-    game.bgm.play();
-}
+    if(game.timer === null) {
+
+        game.timer = setInterval(ticker, 30);
+
+        game.bgm.play();
+
+        return;
+
+    }
+
+    // ゲーム中の操作
+
+    if(game.isGameOver === false) {
+
+        game.cat.moveY = -7;
+
+        game.catSound.currentTime = 0;
+
+        game.catSound.play();
+
+        game.bgm.play();
+
+    }
+
 };
