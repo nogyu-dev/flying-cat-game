@@ -7,6 +7,7 @@ const imageNames = ['chicken', 'centaur', 'squirrel', 'bomb', 'negigirl', 'rushi
 // グローバルな game オブジェクト
 const game = {
     enemys: [],
+    enemyCounter: 0,
     clouds: [],
     cloudCounter: 0,
     chickenCounter: 0,
@@ -75,27 +76,35 @@ function ticker() {
     game.chickenCounter = 0;
     }
 
+
     // ランダムに障害物を生成
-    if(Math.floor(Math.random() * 1500) === 0) {
+    game.enemyCounter += 1;
+
+    if(game.enemyCounter >= 60) {
+    const randomEnemy = Math.floor(Math.random() * 20);
+
+    if(randomEnemy < 5) {
+        createBomb();
+
+    } else if(randomEnemy < 9) {
+        createNegiGirl();
+
+    } else if(randomEnemy < 12) {
+        createRushingBoy();
+
+    } else if(randomEnemy < 15) {
+        createYoshimuramen();
+
+    } else if(randomEnemy < 17) {
+      createBath();
+
+    } else if(randomEnemy < 19) {
+        createSquirrel();
+
+    } else {
         createCentaur();
     }
-    if(Math.floor(Math.random() * 1000) === 0) {
-       createSquirrel();
-    }
-     if(Math.floor(Math.random() * 600) === 0) {
-       createBomb();
-    }
-     if(Math.floor(Math.random() * 800) === 0) {
-        createNegiGirl();
-    }
-    if(Math.floor(Math.random() * 800) === 0) {
-        createRushingBoy();
-    }
-    if(Math.floor(Math.random() * 1000) === 0) {
-        createBath();
-    }
-    if(Math.floor(Math.random() * 800) === 0) {
-    createYoshimuramen();
+    game.enemyCounter = 0;
     }
 
 
@@ -194,7 +203,7 @@ function createCentaur() {
         y: centaurY,
         width: 300,
         height: 280,
-        moveX: -3,
+        moveX: -2,
         image: game.image.centaur
     });
 }
@@ -218,7 +227,7 @@ function createBomb() {
         y: bombY,
         width: 70,
         height: 49,
-        moveX: -7,
+        moveX: -8,
         image: game.image.bomb
     });
 }
@@ -230,7 +239,7 @@ function createNegiGirl() {
         y: girlY,
         width: 150,
         height: 117,
-        moveX: -8,
+        moveX: -10,
         image: game.image.negigirl
     });
 }
@@ -242,7 +251,7 @@ function createRushingBoy() {
         y: rushingBoyY,
         width: 130,
         height: 108,
-        moveX: -10,
+        moveX: -12,
         image: game.image.rushingboy
     });
 }
@@ -278,7 +287,7 @@ function createTsunoballoon() {
         y: canvas.height + 600,
         width: 800,
         height: 1200,
-        moveY: -5,
+        moveY: -4,
         image: game.image.tsunoballoon
     };
 }
