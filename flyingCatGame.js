@@ -362,8 +362,8 @@ function drawSky() {
 }
 
 function drawScore() {
-    ctx.font = '24px serif';
-    ctx.fillText(`飛行距離 : ${Math.floor(game.score)} m`, 10, 30);
+    ctx.font = '30px sans-serif';
+    ctx.fillText(`飛行距離 : ${Math.floor(game.score)} m`, 10, 40);
 }
 
 function hitCheck() {
@@ -373,8 +373,8 @@ function hitCheck() {
             Math.abs(game.cat.y - enemy.y) < game.cat.height * 0.7 / 2 + enemy.height * 0.7 / 2
         ) {
             game.isGameOver = true;
-            ctx.font = 'bold 100px serif';
-            ctx.fillText(`Game Over!`, 370, 390);
+            ctx.font = 'bold 110px sans-serif';
+            ctx.fillText(`Game Over!`, 330, 390);
 
             // BGMを停止
             game.bgm.pause();
