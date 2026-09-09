@@ -108,6 +108,11 @@ function ticker() {
     }
 
 
+    // 難易度アップ
+    if(game.score >= 750 && Math.floor(Math.random() * 300) === 0) {
+    createSquirrel();
+     }
+
     // キャクターの移動
     moveClouds(); // 雲の移動
     moveCat(); // 猫の移動
