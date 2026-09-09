@@ -361,11 +361,6 @@ function drawScore() {
 
 function drawGameOver() {
     if(game.isGameOver === true) {
-        // 水色の背景
-        ctx.fillStyle = 'lightblue';
-        ctx.fillRect(300, 280, 680, 140);
-
-        // Game Overの文字
         ctx.fillStyle = 'black';
         ctx.font = 'bold 110px sans-serif';
         ctx.fillText('Game Over!', 330, 390);
