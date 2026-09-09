@@ -68,7 +68,7 @@ function ticker() {
     }
 
     // 敵キャラクターの生成
-    if(Math.floor(Math.random() * 400 ) === 0) {
+    if(Math.floor(Math.random() * 300 ) === 0) {
         createChicken();
     }
     if(Math.floor(Math.random() * 1500) === 0) {
@@ -129,10 +129,11 @@ function ticker() {
     drawEnemys(); // 敵キャラクターの描画
     drawTsunoballoon(); // 津野先生風船の描画
     drawScore(); // スコアの描画
+    drawGameOver(); // ゲームオーバーの描画
 
 
     // 1000mまで飛んだらゲームクリア
-    if (game.score >= 100) {
+    if (game.score >= 1000) {
      game.isGameOver = true;
 
     game.bgm.pause();
@@ -206,64 +207,65 @@ function createSquirrel() {
 }
 
 function createBomb() {
-    const bombY = Math.random() * (canvas.height - 70) + 35;
+    const bombY = Math.random() * (canvas.height - 49) + 24.5;
     game.enemys.push({
-        x: canvas.width + 50,
+        x: canvas.width + 35,
         y: bombY,
-        width: 100,
-        height: 70,
+        width: 70,
+        height: 49,
         moveX: -7,
         image: game.image.bomb
     });
 }
 
 function createNegiGirl() {
-    const girlY = Math.random() * (canvas.height - 125) + 62.5;
+    const girlY = Math.random() * (canvas.height - 117) + 58.5;
     game.enemys.push({
-        x: canvas.width + 80,
+        x: canvas.width + 75,
         y: girlY,
-        width: 160,
-        height: 125,
+        width: 150,
+        height: 117,
         moveX: -7,
         image: game.image.negigirl
     });
 }
 
 function createRushingBoy() {
-    const rushingBoyY = Math.random() * (canvas.height - 125) + 62.5;
+    const rushingBoyY = Math.random() * (canvas.height - 108) + 54;
     game.enemys.push({
-        x: canvas.width + 75,
+        x: canvas.width + 65,
         y: rushingBoyY,
-        width: 150,
-        height: 125,
+        width: 130,
+        height: 108,
         moveX: -15,
         image: game.image.rushingboy
     });
 }
 
 function createBath() {
-    const bathY = Math.random() * (canvas.height - 180) + 90;
+    const bathY = Math.random() * (canvas.height - 166) + 83;
     game.enemys.push({
-        x: canvas.width + 130,
+        x: canvas.width + 120,
         y: bathY,
-        width: 260,
-        height: 180,
+        width: 240,
+        height: 166,
         moveX: -5,
         image: game.image.bath
     });
 }
 
 function createYoshimuramen() {
-    const ramenY = Math.random() * (canvas.height - 218) + 109;
+    const ramenY = Math.random() * (canvas.height - 197) + 98.5;
     game.enemys.push({
-        x: canvas.width + 105,
+        x: canvas.width + 95,
         y: ramenY,
-        width: 210,
-        height: 218,
-        moveX: -5,
+        width: 190,
+        height: 197,
+        moveX: -4,
         image: game.image.yoshimuramen
     });
 }
+
 
 function createTsunoballoon() {
     game.tsunoballoon = {
@@ -357,6 +359,19 @@ function drawScore() {
     ctx.fillText(`飛行距離 : ${Math.floor(game.score)} m`, 10, 40);
 }
 
+function drawGameOver() {
+    if(game.isGameOver === true) {
+        // 水色の背景
+        ctx.fillStyle = 'lightblue';
+        ctx.fillRect(300, 280, 680, 140);
+
+        // Game Overの文字
+        ctx.fillStyle = 'black';
+        ctx.font = 'bold 110px sans-serif';
+        ctx.fillText('Game Over!', 330, 390);
+    }
+}
+
 function hitCheck() {
     for (const enemy of game.enemys) {
         if (
@@ -364,8 +379,6 @@ function hitCheck() {
             Math.abs(game.cat.y - enemy.y) < game.cat.height * 0.7 / 2 + enemy.height * 0.7 / 2
         ) {
             game.isGameOver = true;
-            ctx.font = 'bold 110px sans-serif';
-            ctx.fillText(`Game Over!`, 330, 390);
 
             // BGMを停止
             game.bgm.pause();
