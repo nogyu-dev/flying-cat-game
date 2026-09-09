@@ -70,7 +70,7 @@ function ticker() {
 
     // 定期的にニワトリを生成
     game.chickenCounter += 1;
-    if(game.chickenCounter >= 150) {
+    if(game.chickenCounter >= 100) {
     createChicken();
     game.chickenCounter = 0;
     }
@@ -182,7 +182,7 @@ function createChicken() {
         y: chickenY,
         width: 100,
         height: 90,
-        moveX: -4,
+        moveX: -6,
         image: game.image.chicken
     });
 }
@@ -230,7 +230,7 @@ function createNegiGirl() {
         y: girlY,
         width: 150,
         height: 117,
-        moveX: -7,
+        moveX: -8,
         image: game.image.negigirl
     });
 }
@@ -242,7 +242,7 @@ function createRushingBoy() {
         y: rushingBoyY,
         width: 130,
         height: 108,
-        moveX: -15,
+        moveX: -10,
         image: game.image.rushingboy
     });
 }
@@ -254,7 +254,7 @@ function createBath() {
         y: bathY,
         width: 240,
         height: 166,
-        moveX: -5,
+        moveX: -4,
         image: game.image.bath
     });
 }
@@ -266,7 +266,7 @@ function createYoshimuramen() {
         y: ramenY,
         width: 190,
         height: 197,
-        moveX: -4,
+        moveX: -5,
         image: game.image.yoshimuramen
     });
 }
