@@ -2,7 +2,7 @@ const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 const clearVideo = document.getElementById('clearVideo');
 
-const imageNames = ['chicken', 'centaur', 'squirrel', 'bomb', 'negigirl', 'rushingboy', 'bath', 'yoshimuraufo', 'cat', 'sky', 'cloud', 'tsunoballoon'];
+const imageNames = ['chicken', 'centaur', 'squirrel', 'bomb', 'negigirl', 'rushingboy', 'bath', 'yoshimuramen', 'cat', 'sky', 'cloud', 'tsunoballoon'];
 
 // グローバルな game オブジェクト
 const game = {
@@ -89,8 +89,8 @@ function ticker() {
     if(Math.floor(Math.random() * 1000) === 0) {
         createBath();
     }
-    if(Math.floor(Math.random() * 1200) === 0) {
-    createYoshimuraUfo();
+    if(Math.floor(Math.random() * 800) === 0) {
+    createYoshimuramen();
     }
 
 
@@ -106,8 +106,8 @@ function ticker() {
     // 飛行距離の更新
     game.score += 0.3;
 
-    // 300mで1回目の邪魔画像
-    if(game.score >= 300 && game.tsunoballoonCount === 0) {
+    // 200mで1回目の邪魔画像
+    if(game.score >= 200 && game.tsunoballoonCount === 0) {
     createTsunoballoon();
     game.tsunoballoonCount = 1;
     }
@@ -132,18 +132,9 @@ function ticker() {
 
 
     // 1000mまで飛んだらゲームクリア
-    if (game.score >= 1000) {
+    if (game.score >= 100) {
      game.isGameOver = true;
 
-    // Game Clearの背景
-    ctx.fillStyle = 'lightblue';
-    ctx.fillRect(330, 110, 570, 130);
-
-    // Game Clearの文字
-    ctx.fillStyle = 'black';
-    ctx.font = 'bold 80px serif';
-    ctx.fillText('Game Clear!', 350, 180);
-  
     game.bgm.pause();
 
     // クリア動画を表示して再生
@@ -262,25 +253,25 @@ function createBath() {
     });
 }
 
-function createYoshimuraUfo() {
-    const ufoY = Math.random() * (canvas.height - 190) + 95;
+function createYoshimuramen() {
+    const ramenY = Math.random() * (canvas.height - 218) + 109;
     game.enemys.push({
         x: canvas.width + 105,
-        y: ufoY,
+        y: ramenY,
         width: 210,
-        height: 190,
-        moveX: -6,
-        image: game.image.yoshimuraufo
+        height: 218,
+        moveX: -5,
+        image: game.image.yoshimuramen
     });
 }
 
 function createTsunoballoon() {
     game.tsunoballoon = {
         x: canvas.width / 2,
-        y: canvas.height + 450,
-        width: 600,
-        height: 900,
-        moveY: -7,
+        y: canvas.height + 600,
+        width: 800,
+        height: 1200,
+        moveY: -5,
         image: game.image.tsunoballoon
     };
 }
