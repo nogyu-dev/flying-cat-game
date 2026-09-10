@@ -8,6 +8,10 @@ ZENStudy Webページコンテスト2026夏 応募作品
 
 1000mに到達すると、特別なクリア映像が再生されます。
 
+## GitHub Pages
+
+https://nogyu-dev.github.io/flying-cat-game/
+
 ## 遊び方
 
 - PC：スペースキーで上昇
