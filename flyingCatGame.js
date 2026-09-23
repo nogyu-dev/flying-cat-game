@@ -496,6 +496,9 @@ document.ontouchstart = function () {
 
   if (game.isGameOver === false) {
     game.cat.moveY = -7;
+    
+    const catSound = new Audio("sound/cat.mp3");
+    catSound.play();
 
   }
 };
