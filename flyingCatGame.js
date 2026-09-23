@@ -478,7 +478,6 @@ document.onkeydown = function (e) {
     game.catSound.currentTime = 0;
 
     game.catSound.play();
-    game.bgm.play();
   }
 };
 
@@ -500,6 +499,5 @@ document.ontouchstart = function () {
     game.catSound.currentTime = 0;
 
     game.catSound.play();
-    game.bgm.play();
   }
 };
