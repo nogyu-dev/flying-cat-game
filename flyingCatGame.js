@@ -475,8 +475,8 @@ document.onkeydown = function (e) {
 
   if (e.key === " " && game.isGameOver === false) {
     game.cat.moveY = -7;
+    
     game.catSound.currentTime = 0;
-
     game.catSound.play();
   }
 };
@@ -497,8 +497,8 @@ document.ontouchstart = function () {
   if (game.isGameOver === false) {
     game.cat.moveY = -7;
     
-    const catSound = new Audio("sound/cat.mp3");
-    catSound.play();
+    game.catSound.currentTime = 0;
+    game.catSound.play();
 
   }
 };
