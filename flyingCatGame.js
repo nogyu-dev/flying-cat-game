@@ -496,8 +496,6 @@ document.ontouchstart = function () {
 
   if (game.isGameOver === false) {
     game.cat.moveY = -7;
-    game.catSound.currentTime = 0;
 
-    game.catSound.play();
   }
 };
