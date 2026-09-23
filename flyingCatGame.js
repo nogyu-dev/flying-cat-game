@@ -501,4 +501,5 @@ document.ontouchstart = function () {
     game.catSound.currentTime = 0;
     game.catSound.play();
   }
+}
 };
