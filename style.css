@@ -3,8 +3,10 @@ body {
 }
 
 canvas {
+  display: block;
   width: min(100vw, calc(100dvh * 16 / 9));
   height: auto;
+  margin: 0 auto;
 }
 
 #clearVideo {
