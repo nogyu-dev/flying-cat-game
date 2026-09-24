@@ -127,7 +127,7 @@ function ticker() {
   if (game.score >= 700) {
     game.squirrelCounter += 1;
 
-    if (game.squirrelCounter >= 80) {
+    if (game.squirrelCounter >= 65) {
       createSquirrel();
       game.squirrelCounter = 0;
     }
