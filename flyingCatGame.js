@@ -168,6 +168,15 @@ function ticker() {
   drawEnemys(); // 敵キャラクターの描画
   drawTsunoballoon(); // 津野先生風船の描画
   drawScore(); // スコアの描画
+
+  // 700mで難易度アップを表示
+  if (game.score >= 700 && game.score < 730) {
+    ctx.fillStyle = "red";
+    ctx.font = "bold 60px sans-serif";
+    ctx.fillText("難易度アップ！", 440, 150);
+    ctx.fillStyle = "black";
+  }
+  
   drawGameOver(); // ゲームオーバーの描画
 
   // 1000mでゲームクリア
