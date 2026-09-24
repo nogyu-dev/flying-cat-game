@@ -36,6 +36,7 @@ const game = {
   score: 0,
   timer: null,
   lastCatSoundTime: 0,
+  squirrelCounter: 0,
 };
 
 game.catSound.preload = "auto";
@@ -67,6 +68,7 @@ function init() {
   game.tsunoballoonCount = 0;
   game.isGameOver = false;
   game.score = 0;
+  game.squirrelCounter = 0;
 
   createCat();
   createCloud();
@@ -121,9 +123,14 @@ function ticker() {
     game.enemyCounter = 0;
   }
 
-  // 700m以降はリスの出現率をアップ
-  if (game.score >= 700 && Math.floor(Math.random() * 100) === 0) {
-    createSquirrel();
+  // 700m以降は一定間隔でリスを生成
+  if (game.score >= 700) {
+    game.squirrelCounter += 1;
+
+    if (game.squirrelCounter >= 80) {
+      createSquirrel();
+      game.squirrelCounter = 0;
+    }
   }
 
   // キャラクターを移動
