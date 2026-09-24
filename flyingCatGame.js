@@ -35,6 +35,7 @@ const game = {
   isGameOver: true,
   score: 0,
   timer: null,
+  lastCatSoundTime: 0,
 };
 
 game.catSound.preload = "auto";
@@ -499,9 +500,12 @@ document.ontouchstart = function () {
   if (game.isGameOver === false) {
     game.cat.moveY = -7;
 
-  if (game.catSound.paused) {
+  const now = Date.now();
+
+  if (now - game.lastCatSoundTime >= 180) {
     game.catSound.currentTime = 0;
     game.catSound.play();
+    game.lastCatSoundTime = now;
   }
 }
 };
