@@ -37,6 +37,8 @@ const game = {
   timer: null,
 };
 
+game.catSound.preload = "auto";
+
 // BGMをループ再生
 game.bgm.loop = true;
 
