@@ -122,7 +122,7 @@ function ticker() {
   }
 
   // 700m以降はリスの出現率をアップ
-  if (game.score >= 700 && Math.floor(Math.random() * 200) === 0) {
+  if (game.score >= 700 && Math.floor(Math.random() * 100) === 0) {
     createSquirrel();
   }
 
