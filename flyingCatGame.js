@@ -502,7 +502,7 @@ document.ontouchstart = function () {
 
   const now = Date.now();
 
-  if (now - game.lastCatSoundTime >= 220) {
+  if (now - game.lastCatSoundTime >= 250) {
     game.catSound.currentTime = 0;
     game.catSound.play();
     game.lastCatSoundTime = now;
